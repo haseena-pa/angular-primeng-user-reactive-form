@@ -1,0 +1,68 @@
+<p-card styleClass="user-form" class="flex justify-content-center">
+  <form [formGroup]="userForm" (ngSubmit)="addUser()">
+    <div class="field">
+      <label for="firstName" class="block">First Name</label>
+      <input
+        type="text"
+        pInputText
+        placeholder="First Name"
+        formControlName="firstName"
+      />
+      <small
+        class="p-error block"
+        *ngIf="
+          userForm.get('firstName')?.invalid && userForm.get('firstName')?.dirty
+        "
+      >
+        First name is required</small
+      >
+    </div>
+    <div class="field">
+      <label for="lastName" class="block">Last Name</label>
+      <input
+        type="text"
+        pInputText
+        placeholder="Last Name"
+        formControlName="lastName"
+      />
+    </div>
+
+    <div formGroupName="address">
+      <h2>Address</h2>
+      <div class="field">
+        <label for="street" class="block">Street</label>
+        <input
+          type="text"
+          pInputText
+          placeholder="Street"
+          formControlName="street"
+        />
+      </div>
+      <div class="field">
+        <label for="postCode" class="block">PostCode</label>
+        <input
+          type="text"
+          pInputText
+          placeholder="PostCode"
+          formControlName="postCode"
+        />
+        <small
+          class="p-error block"
+          *ngIf="
+            userForm.get('address')?.get('postCode')?.invalid &&
+            userForm.get('address')?.get('postCode')?.dirty
+          "
+        >
+          PostCode is required</small
+        >
+      </div>
+    </div>
+
+    <button
+      pButton
+      type="submit"
+      label="Submit"
+      [disabled]="userForm.invalid"
+    ></button>
+  </form>
+</p-card>
